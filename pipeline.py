@@ -38,7 +38,7 @@ def run(fecha=None):
 
     logger.info("\n[1/4] Ejecutando scraper MercadoPublico...")
     scraper = MercadoPublicoScraper()
-    df = scraper.scrape(
+    df, items = scraper.scrape(
         fecha=datetime.strptime(hoy, "%Y-%m-%d").strftime("%d%m%Y")
         if fecha else None
     )
@@ -56,12 +56,19 @@ def run(fecha=None):
     logger.info("\n[4/4] Cargando a base de datos...")
     insertadas = db.load_licitaciones(df)
 
+    items_insertados = 0
+    for licitacion_items in items:
+        codigo = licitacion_items.get("codigo_licitacion")
+        items_insertados += db.load_items(codigo, [licitacion_items])
+
     logger.info("\n" + "=" * 55)
     logger.info("  PIPELINE COMPLETADO")
     logger.info(f"  Licitaciones scrapeadas  : {len(df)}")
     logger.info(f"  Licitaciones insertadas  : {insertadas}")
+    logger.info(f"  Items insertados         : {items_insertados}")
     logger.info(f"  CSV guardado en          : {csv_path}")
-    logger.info(f"  Total en DB              : {db.count()}")
+    logger.info(f"  Total licitaciones en DB : {db.count('licitaciones')}")
+    logger.info(f"  Total items en DB        : {db.count('items')}")
     logger.info("=" * 55)
 
     print("\n📋 Vista previa:")

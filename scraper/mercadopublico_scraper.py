@@ -26,6 +26,7 @@ PALABRAS_EXCLUIR = [
     "seguridad", "alimentación", "cocina"
 ]
 
+
 class MercadoPublicoScraper(BaseScraper):
 
     def __init__(self):
@@ -36,6 +37,7 @@ class MercadoPublicoScraper(BaseScraper):
         tiene_clave   = any(p in nombre for p in PALABRAS_CLAVE)
         esta_excluida = any(p in nombre for p in PALABRAS_EXCLUIR)
         return tiene_clave and not esta_excluida
+
     def obtener_licitaciones_dia(self, fecha: str = None) -> list:
         if fecha is None:
             fecha = self.today_api()
@@ -47,7 +49,7 @@ class MercadoPublicoScraper(BaseScraper):
             logger.warning(f"Sin datos para la fecha {fecha}")
             return []
 
-        total = data["Cantidad"]
+        total   = data["Cantidad"]
         listado = data["Listado"]
         logger.info(f"Total licitaciones del día: {total}")
 
@@ -58,6 +60,7 @@ class MercadoPublicoScraper(BaseScraper):
         logger.info(f"Licitaciones hospitalarias: {len(hospitalarias)}")
 
         return hospitalarias
+
     def obtener_detalle(self, codigo: str) -> dict | None:
         url = f"{BASE_URL}/Licitaciones.json?codigo={codigo}&ticket={TICKET}"
         data = self.get_json(url)
@@ -67,11 +70,12 @@ class MercadoPublicoScraper(BaseScraper):
             return None
 
         return data["Listado"][0]
-    def extraer_campos(self, detalle: dict) -> dict:
+
+    def extraer_campos(self, detalle: dict) -> tuple:
         comprador = detalle.get("Comprador", {})
         fechas    = detalle.get("Fechas", {})
 
-        return {
+        licitacion = {
             "codigo":             detalle.get("CodigoExterno"),
             "nombre":             detalle.get("Nombre", "").strip(),
             "estado":             detalle.get("Estado"),
@@ -87,16 +91,22 @@ class MercadoPublicoScraper(BaseScraper):
             "cantidad_items":     detalle.get("Items", {}).get("Cantidad", 0),
             "date_scraped":       self.today(),
         }
-    def scrape(self, fecha: str = None) -> pd.DataFrame:
+
+        items = detalle.get("Items", {}).get("Listado", [])
+
+        return licitacion, items
+
+    def scrape(self, fecha: str = None) -> tuple:
         logger.info("=== Iniciando MercadoPublico Scraper ===")
 
         licitaciones = self.obtener_licitaciones_dia(fecha)
 
         if not licitaciones:
             logger.warning("Sin licitaciones hospitalarias para procesar.")
-            return pd.DataFrame()
+            return pd.DataFrame(), []
 
-        registros = []
+        registros   = []
+        todos_items = []
 
         for i, lic in enumerate(licitaciones, 1):
             codigo = lic.get("CodigoExterno")
@@ -106,12 +116,18 @@ class MercadoPublicoScraper(BaseScraper):
             if detalle is None:
                 continue
 
-            campos = self.extraer_campos(detalle)
-            registros.append(campos)
+            licitacion, items = self.extraer_campos(detalle)
+            registros.append(licitacion)
+
+            for item in items:
+                item["codigo_licitacion"] = codigo
+                todos_items.append(item)
 
         df = pd.DataFrame(registros)
         logger.info(f"Total registros extraídos: {len(df)}")
-        return df
+        logger.info(f"Total items extraídos: {len(todos_items)}")
+
+        return df, todos_items
 
     def save_csv(self, df: pd.DataFrame) -> str:
         os.makedirs(OUTPUT_DIR, exist_ok=True)
@@ -119,14 +135,16 @@ class MercadoPublicoScraper(BaseScraper):
         df.to_csv(filename, index=False, encoding="utf-8")
         logger.info(f"Datos guardados en: {filename}")
         return filename
-    
+
+
 if __name__ == "__main__":
     scraper = MercadoPublicoScraper()
-    df = scraper.scrape(fecha="16032026")
+    df, items = scraper.scrape(fecha="16032026")
 
     if not df.empty:
         path = scraper.save_csv(df)
         print(f"\n✅ Scraping completado: {len(df)} licitaciones")
+        print(f"📦 Items extraídos: {len(items)}")
         print(f"📁 Archivo guardado: {path}")
         print("\n📋 Primeras 5 filas:")
         print(df[["codigo", "hospital", "region", "monto_estimado"]].head())
