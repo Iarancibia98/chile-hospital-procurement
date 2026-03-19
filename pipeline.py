@@ -76,4 +76,4 @@ def run(fecha=None):
 
 
 if __name__ == "__main__":
-    run(fecha="2026-03-16")
+    run()

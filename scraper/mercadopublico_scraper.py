@@ -9,7 +9,9 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-TICKET = os.getenv("MERCADOPUBLICO_TICKET", "F8537A18-6766-4DEF-9E59-426B4FEE2844")
+TICKET = os.getenv("MERCADOPUBLICO_TICKET")
+if not TICKET:
+    raise ValueError("Falta MERCADOPUBLICO_TICKET en el archivo .env")
 BASE_URL = "https://api.mercadopublico.cl/servicios/v1/Publico"
 OUTPUT_DIR = "data"
 
@@ -139,7 +141,7 @@ class MercadoPublicoScraper(BaseScraper):
 
 if __name__ == "__main__":
     scraper = MercadoPublicoScraper()
-    df, items = scraper.scrape(fecha="16032026")
+    df, items = scraper.scrape()
 
     if not df.empty:
         path = scraper.save_csv(df)
