@@ -25,31 +25,27 @@ Este proyecto construye un pipeline automatizado que extrae, procesa y visualiza
 
 ## 📊 Hallazgos principales
 
-Los siguientes insights fueron extraídos del análisis de **195 licitaciones hospitalarias** y **1.828 items de productos** correspondientes al período analizado.
+> Los insights se actualizan automáticamente con cada ejecución del pipeline.
+> Los datos mostrados a continuación corresponden al análisis inicial
+> realizado con las licitaciones del **16 de marzo de 2026**.
 
 ### 🔴 Baja efectividad del proceso de compra
-
-Solo el **21% de las licitaciones son adjudicadas**, lo que indica una baja tasa de éxito en los procesos de compra pública hospitalaria. Esto sugiere problemas en el diseño de bases de licitación, baja participación de proveedores o desalineación con las condiciones reales del mercado.
+Solo el **21% de las licitaciones fueron adjudicadas** en el período analizado, lo que sugiere problemas en el diseño de bases de licitación o baja participación de proveedores.
 
 ### ⚡ Procesos de compra lentos
-
-El tiempo promedio de adjudicación supera los **60 días**, lo que refleja una baja eficiencia operativa que impacta directamente en la disponibilidad de insumos y la continuidad operacional de los hospitales.
+El tiempo promedio de adjudicación supera los **60 días**, impactando directamente en la disponibilidad de insumos hospitalarios.
 
 ### 🟠 Falta de visibilidad financiera
-
-Solo el **45% de las licitaciones cuenta con monto estimado informado**, lo que limita el control presupuestario y la transparencia del sistema. El monto total analizado supera los **$9.600 millones CLP**.
+Solo el **45% de las licitaciones** contaba con monto estimado informado, limitando el control presupuestario del sistema.
 
 ### 🟡 Alta concentración del gasto
-
-El gasto se concentra en un grupo reducido de hospitales, liderado por el **Hospital Padre Alberto Hurtado** y el **Servicio de Salud Oriente Hospital del Salvador**, ambos de la Región Metropolitana. Esto indica centralización de compras y posible desigualdad en la asignación de recursos entre regiones.
+El monto total analizado superó los **$9.600 millones CLP**, concentrado principalmente en hospitales de la Región Metropolitana.
 
 ### 🔁 Evidencia de compras reactivas
-
-Algunos hospitales presentan alta frecuencia de licitaciones en períodos cortos, lo que sugiere una gestión de abastecimiento poco planificada y compras reactivas en vez de preventivas.
+Algunos hospitales presentaron alta frecuencia de licitaciones en períodos cortos, sugiriendo gestión de abastecimiento poco planificada.
 
 ### 📦 Mezcla de compras clínicas y operativas
-
-Las licitaciones incluyen tanto insumos médicos críticos como medicamentos, equipamiento quirúrgico y reactivos de laboratorio, junto con productos administrativos como útiles de oficina y arriendo de vehículos. Esto evidencia una oportunidad para segmentar estrategias de compra y optimizar los procesos de adquisición.
+Las licitaciones incluyeron tanto insumos médicos críticos como productos administrativos, evidenciando oportunidades de segmentación en las estrategias de compra.
 
 ---
 
