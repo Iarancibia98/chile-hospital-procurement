@@ -14,38 +14,38 @@ Monitor automatizado de licitaciones hospitalarias públicas — API MercadoPubl
 
 Chile destina miles de millones de pesos anuales en licitaciones hospitalarias públicas. Sin embargo, esa información está dispersa en cientos de registros en MercadoPublico y nunca ha sido analizada de forma sistemática.
 
-Este proyecto construye un pipeline automatizado que extrae, procesa y visualiza las licitaciones hospitalarias públicas de Chile para responder preguntas críticas de supply chain:
+Este proyecto construye un pipeline automatizado que extrae, procesa y visualiza las licitaciones hospitalarias públicas de Chile para responder preguntas críticas de supply chain y control de gestión:
 
-- ¿Qué hospitales gastan más y en qué?
-- ¿Cuánto demora el sistema en adjudicar una compra?
-- ¿Qué regiones tienen procesos de compra más eficientes?
-- ¿Qué insumos médicos se licitan con mayor frecuencia?
+- ¿Qué hospitales gastan más y en qué categorías de insumos?
+- ¿cuánto demora el sistema en adjudicar una compra hospitalaria?
+- ¿Qué regiones concentran el mayor volumen y presupuesto?
+- ¿Qué insumos médicos y farmacéuticos se licitan con mayor frecuencia?
 
 ---
 
 ## 📊 Hallazgos principales
 
 > Los insights se actualizan automáticamente con cada ejecución del pipeline.
-> Los datos mostrados a continuación corresponden al análisis inicial
-> realizado con las licitaciones del **16 de marzo de 2026**.
+> Los datos mostrados a continuación corresponden al análisis consolidado
+> con las licitaciones registradas al **29 de agosto de 2026**.
 
-### 🔴 Baja efectividad del proceso de compra
-Solo el **21% de las licitaciones fueron adjudicadas** en el período analizado, lo que sugiere problemas en el diseño de bases de licitación o baja participación de proveedores.
+### 🔴 Baja efectividad de adjudicación
+Solo el **21,0% de las licitaciones fueron adjudicadas** en el período analizado (sobre un total de 195 procesos identificados), lo que evidencia desafíos en la participación de proveedores o en el diseño de las bases de licitación.
 
-### ⚡ Procesos de compra lentos
-El tiempo promedio de adjudicación supera los **60 días**, impactando directamente en la disponibilidad de insumos hospitalarios.
+### ⚡ Ciclos de compra extendidos
+El tiempo promedio de adjudicación alcanza los **60,3 días**, impactando directamente la oportunidad y continuidad en la disponibilidad de insumos hospitalarios.
 
-### 🟠 Falta de visibilidad financiera
-Solo el **45% de las licitaciones** contaba con monto estimado informado, limitando el control presupuestario del sistema.
+### 🟠 Limitada visibilidad financiera
+Solo el **45,1% de las licitaciones contó con un monto estimado informado**, lo que restringe el control presupuestario previo del sistema. Además, la tasa de licitaciones fallidas fue del **3,1%**.
 
-### 🟡 Alta concentración del gasto
-El monto total analizado superó los **$9.600 millones CLP**, concentrado principalmente en hospitales de la Región Metropolitana.
+### 🟡 Concentración territorial del presupuesto
+El monto total analizado superó los **$9.633 millones CLP**, concentrado fuertemente en la Región Metropolitana de Santiago ($5.822 MM CLP; 65 licitaciones), seguida por la Región del Biobío ($903 MM CLP) y la Región de los Lagos ($892 MM CLP).
 
-### 🔁 Evidencia de compras reactivas
-Algunos hospitales presentaron alta frecuencia de licitaciones en períodos cortos, sugiriendo gestión de abastecimiento poco planificada.
+### 🔁 Compras reactivas y gestión hospitalaria
+Hospitales como el **Hospital de Melipilla** y el **Servicio de Salud Hospital de Santa Cruz** encabezan la frecuencia de compras, mientras que el **Servicio de Salud Los Ríos** y la **Municipalidad de Pica** concentran los mayores montos licitados.
 
-### 📦 Mezcla de compras clínicas y operativas
-Las licitaciones incluyeron tanto insumos médicos críticos como productos administrativos, evidenciando oportunidades de segmentación en las estrategias de compra.
+### 📦 Estructura de abastecimiento e insumos
+Las **Farmacias** y las **Unidades dentales/médicas** lideran los productos más solicitados. En la distribución por categoría médica, el equipamiento representa un **27,6%** y los medicamentos un **26,6%** del total de ítems licitados.
 
 ---
 
