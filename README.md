@@ -12,40 +12,61 @@ Monitor automatizado de licitaciones hospitalarias públicas — API MercadoPubl
 
 ## 🎯 Objetivo del proyecto
 
-Chile destina miles de millones de pesos anuales en licitaciones hospitalarias públicas. Sin embargo, esa información está dispersa en cientos de registros en MercadoPublico y nunca ha sido analizada de forma sistemática.
+Chile destina miles de millones de pesos anuales en licitaciones hospitalarias públicas. Sin embargo, esa información está dispersa en cientos de registros en MercadoPublico y requiere procesamiento para transformarse en información útil para la toma de decisiones.
 
-Este proyecto construye un pipeline automatizado que extrae, procesa y visualiza las licitaciones hospitalarias públicas de Chile para responder preguntas críticas de supply chain y control de gestión:
+Este proyecto construye un pipeline automatizado que extrae, procesa, almacena y visualiza licitaciones hospitalarias públicas de Chile para responder preguntas relevantes de **Supply Chain y Control de Gestión**:
 
-- ¿Qué hospitales gastan más y en qué categorías de insumos?
-- ¿cuánto demora el sistema en adjudicar una compra hospitalaria?
-- ¿Qué regiones concentran el mayor volumen y presupuesto?
-- ¿Qué insumos médicos y farmacéuticos se licitan con mayor frecuencia?
+- ¿Qué hospitales e instituciones concentran mayores montos licitados?
+- ¿Cuánto demora el sistema en adjudicar una compra hospitalaria?
+- ¿Qué regiones concentran el mayor volumen de licitaciones y presupuesto?
+- ¿Qué productos e insumos se solicitan con mayor frecuencia?
+- ¿Cómo se distribuyen los ítems licitados según categoría?
 
 ---
 
 ## 📊 Hallazgos principales
 
 > Los insights se actualizan automáticamente con cada ejecución del pipeline.
-> Los datos mostrados a continuación corresponden al análisis consolidado
-> con las licitaciones registradas al **29 de agosto de 2026**.
+>
+> Los datos mostrados a continuación corresponden al análisis consolidado con las licitaciones registradas al **29 de agosto de 2026**.
 
-### 🔴 Baja efectividad de adjudicación
-Solo el **21,0% de las licitaciones fueron adjudicadas** en el período analizado (sobre un total de 195 procesos identificados), lo que evidencia desafíos en la participación de proveedores o en el diseño de las bases de licitación.
+### 🔴 Baja proporción de adjudicación
+
+Solo el **21,0% de las licitaciones fueron adjudicadas** en el período analizado, sobre un total de **195 procesos identificados**.
+
+Este indicador permite monitorear la efectividad del proceso de compra y constituye una métrica relevante para analizar posteriormente las causas de los procesos no adjudicados.
 
 ### ⚡ Ciclos de compra extendidos
-El tiempo promedio de adjudicación alcanza los **60,3 días**, impactando directamente la oportunidad y continuidad en la disponibilidad de insumos hospitalarios.
+
+El tiempo promedio de adjudicación alcanza los **60,3 días**, proporcionando una métrica relevante para evaluar la duración de los procesos de adquisición y su impacto potencial sobre la oportunidad de abastecimiento.
 
 ### 🟠 Limitada visibilidad financiera
-Solo el **45,1% de las licitaciones contó con un monto estimado informado**, lo que restringe el control presupuestario previo del sistema. Además, la tasa de licitaciones fallidas fue del **3,1%**.
+
+Solo el **45,1% de las licitaciones contó con un monto estimado informado**, lo que limita la disponibilidad de información financiera para el análisis previo de los procesos.
+
+El **gasto promedio por hospital fue de $82.335.689 CLP**, mientras que la tasa de licitaciones fallidas alcanzó el **3,1%**.
 
 ### 🟡 Concentración territorial del presupuesto
-El monto total analizado superó los **$9.633 millones CLP**, concentrado fuertemente en la Región Metropolitana de Santiago ($5.822 MM CLP; 65 licitaciones), seguida por la Región del Biobío ($903 MM CLP) y la Región de los Lagos ($892 MM CLP).
 
-### 🔁 Compras reactivas y gestión hospitalaria
-Hospitales como el **Hospital de Melipilla** y el **Servicio de Salud Hospital de Santa Cruz** encabezan la frecuencia de compras, mientras que el **Servicio de Salud Los Ríos** y la **Municipalidad de Pica** concentran los mayores montos licitados.
+El monto total analizado alcanzó los **$9.633 millones CLP**.
+
+La **Región Metropolitana de Santiago** concentró el mayor volumen, con **65 licitaciones** y aproximadamente **$5.822 millones CLP**, seguida por la **Región del Biobío**, con aproximadamente **$903 millones CLP**, y la **Región de Los Lagos**, con aproximadamente **$893 millones CLP**.
+
+### 🔁 Concentración institucional de las compras
+
+El análisis evidencia diferencias importantes en el comportamiento de compra entre instituciones.
+
+Entre las instituciones con mayor frecuencia de licitaciones se encuentran el **Servicio de Salud Oriente — Hospital del Salvador**, el **Servicio de Salud Araucanía Sur — Hospital de Nueva Imperial** y el **Hospital Padre Alberto Hurtado**.
+
+En términos de monto licitado, destacan instituciones como el **Hospital Padre Alberto Hurtado**, el **Servicio de Salud Oriente — Hospital del Salvador** y el **Hospital de Melipilla**.
 
 ### 📦 Estructura de abastecimiento e insumos
-Las **Farmacias** y las **Unidades dentales/médicas** lideran los productos más solicitados. En la distribución por categoría médica, el equipamiento representa un **27,6%** y los medicamentos un **26,6%** del total de ítems licitados.
+
+El análisis incorpora un ranking de los **15 productos más solicitados** y una distribución de los ítems por categoría.
+
+Entre los productos con mayor frecuencia aparecen **Farmacias**, **Unidades dentales** y **Unidades médicas**, además de distintos insumos, equipamiento y servicios asociados al ámbito hospitalario.
+
+En la distribución por categoría, **Equipamiento representa el 27,6%** y **Medicamentos el 26,6%** del total de ítems analizados.
 
 ---
 
@@ -166,16 +187,35 @@ El pipeline corre automáticamente todos los días vía **GitHub Actions** extra
 
 ## 🧠 Conclusión
 
-El análisis revela que el sistema de compras hospitalarias públicas en Chile presenta desafíos relevantes en eficiencia, planificación y control financiero. Las principales oportunidades de mejora se centran en aumentar la tasa de adjudicación, reducir tiempos de proceso e implementar estrategias de compra más planificadas.
+El análisis permite observar diferencias relevantes en eficiencia, duración de los procesos, disponibilidad de información financiera, distribución territorial y comportamiento de compra dentro de las licitaciones hospitalarias analizadas.
+
+Los principales indicadores obtenidos son:
+
+- 195 licitaciones analizadas
+- $9.633 millones CLP en monto total registrado
+- 21,0% de procesos adjudicados
+- 60,3 días de tiempo promedio de adjudicación
+- 3,1% de tasa de licitaciones fallidas
+- 45,1% de procesos con monto informado
+- $82.335.689 CLP de gasto promedio por hospital
+
+Estos indicadores establecen una línea base para desarrollar análisis posteriores sobre comportamiento de compra, eficiencia institucional, distribución territorial y gestión de abastecimiento.
 
 ---
 
 ## 📌 Próximos pasos
 
+El proyecto puede evolucionar hacia análisis más avanzados de Data Analytics, Business Intelligence y Supply Chain, incluyendo:
+
 - Modelo predictivo de demanda de insumos
-- Segmentación de hospitales según eficiencia de compra
+- Segmentación de hospitales según comportamiento y eficiencia de compra
+- Análisis temporal de frecuencia y montos de compra
+- Detección de patrones anómalos de contratación
+- Análisis de concentración de productos y proveedores
+- Predicción de tiempos de adjudicación
 - Alertas automáticas de licitaciones críticas
-- Integración con datos de escasez FDA para correlación de supply chain
+- Integración con fuentes externas de información de abastecimiento
+- Correlación con datos de escasez de medicamentos e insumos
 
 ---
 
